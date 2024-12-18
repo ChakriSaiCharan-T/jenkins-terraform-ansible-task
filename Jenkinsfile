@@ -21,7 +21,7 @@ environment {
                     dir('/var/lib/jenkins/workspace/task/jenkins-terraform-ansible-task/') {
                     sh 'pwd'
                     sh 'terraform init'
-                    sh 'terraform validat'
+                    sh 'terraform validate'
                     // sh 'terraform destroy -auto-approve'
                     sh 'terraform plan'
                     sh 'terraform apply -auto-approve'
