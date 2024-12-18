@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    environment { SSH_CREDENTIALS_ID = 'ssh-credentials-id' SSH_OPTS = '-o StrictHostKeyChecking=no' }
+    environment { 
+        SSH_CREDENTIALS_ID = 'ssh-credentials-id' 
+        SSH_OPTS = '-o StrictHostKeyChecking=no' 
+    }
 
     stages {
         
@@ -31,9 +34,11 @@ pipeline {
         stage('Ansible Deployment') {
             steps {
                 script {
+                    withCredentials([sshUserPrivateKey(credentialsId: "${SSH_CREDENTIALS_ID}", keyFileVariable: 'SSH_KEY')]) { sh 'eval $(ssh-agent -s)' sh 'ssh-add ${SSH_KEY}'
                    sleep '360'
                     ansiblePlaybook becomeUser: 'ec2-user', credentialsId: 'amazonlinux', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/inventory.yaml', playbook: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/amazon-playbook.yml', vaultTmpPath: ''
                     ansiblePlaybook become: true, credentialsId: 'ubuntuuser', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/inventory.yaml', playbook: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/ubuntu-playbook.yml', vaultTmpPath: ''
+                }
                 }
             }
         }
