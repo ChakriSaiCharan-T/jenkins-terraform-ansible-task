@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "backend" { #ubuntu.yaml NETADATA
   ami                    = "ami-0e2c8caa4b6378d8c"
   instance_type          = "t2.micro" 
-  key_name               = "narenadr"
+  key_name               = "narendar"
   
   tags = {
     Name = "u21.local"
