@@ -18,10 +18,10 @@ environment {
         stage('Terraform Apply') {
             steps {
                 script {
-                    dir('/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/') {
+                    dir('/var/lib/jenkins/workspace/task/jenkins-terraform-ansible-task/') {
                     sh 'pwd'
                     sh 'terraform init'
-                    sh 'terraform validate'
+                    sh 'terraform validat
                     // sh 'terraform destroy -auto-approve'
                     sh 'terraform plan'
                     sh 'terraform apply -auto-approve'
@@ -34,8 +34,8 @@ environment {
             steps {
                 script {
                    sleep '360'
-                    ansiblePlaybook becomeUser: 'ec2-user', credentialsId: 'amazonlinux', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/inventory.yaml', playbook: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/amazon-playbook.yml', vaultTmpPath: ''
-                    ansiblePlaybook become: true, credentialsId: 'ubuntuuser', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/jenkins-terraform-ansible-task/ansible-task/inventory.yaml', playbook: '/var/lib/jenkins/workspace/ansible-tf/jenkins-terraform-ansible-task/ubuntu-playbook.yml', vaultTmpPath: ''
+                    ansiblePlaybook becomeUser: 'ec2-user', credentialsId: 'amazonlinux', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/task/jenkins-terraform-ansible-task/inventory.yaml', playbook: '/var/lib/jenkins/workspace/task/jenkins-terraform-ansible-task/amazon-playbook.yml', vaultTmpPath: ''
+                    ansiblePlaybook become: true, credentialsId: 'ubuntuuser', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/task/jenkins-terraform-ansible-task/inventory.yaml', playbook: '/var/lib/jenkins/workspace/task/jenkins-terraform-ansible-task/ubuntu-playbook.yml', vaultTmpPath: ''
                 }
             }
         }
