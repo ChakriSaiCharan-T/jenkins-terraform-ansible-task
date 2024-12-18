@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    environment { SSH_CREDENTIALS_ID = 'ssh-credentials-id' SSH_OPTS = '-o StrictHostKeyChecking=no' }
 
     stages {
         
