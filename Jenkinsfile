@@ -11,7 +11,8 @@ environment {
             steps {
                 deleteDir()
                 sh 'echo cloning repo'
-                sh 'git clone https://github.com/narendarmuchunuri/jenkins-terraform-ansible-task.git' 
+                sh 'git clone https://github.com/ChakriSaiCharan-T/jenkins-terraform-ansible-task.git'
+                //sh 'git clone https://github.com/narendarmuchunuri/jenkins-terraform-ansible-task.git' 
             }
         }
         
